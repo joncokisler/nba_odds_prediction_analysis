@@ -1,20 +1,11 @@
 import nba_api.stats.static as static
 from nba_api.stats.endpoints import leaguegamefinder
-from sklearn.linear_model import LogisticRegression
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
 import numpy as np
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 
 def create_games_dataframe():
     from nba_api.stats.static import teams
-    nba_teams = teams.get_teams()
-    reg_playoff_games = ['002', '004', '005', '006']
     gamefinder = leaguegamefinder.LeagueGameFinder(date_from_nullable='09/09/2015', date_to_nullable='09/09/2020')
     gamefinder2 = leaguegamefinder.LeagueGameFinder(date_from_nullable='09/09/2020', date_to_nullable='03/13/2025')
     all_games = pd.concat([gamefinder.get_data_frames()[0],gamefinder2.get_data_frames()[0]], axis=0)
